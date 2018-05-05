@@ -1,9 +1,12 @@
 var Evernote = require('evernote');
 var enml = require('enml-js');
 
-var config = require('../config.json');
 var callbackUrl = "http://localhost:3000/oauth_callback";
-var token = config.PROD_TOKEN;
+var token = process.env.EVERNOTE_PROD_TOKEN;
+var API_CONSUMER_KEY = process.env.EVERNOTE_API_CONSUMER_KEY;
+var API_CONSUMER_SECRET = process.env.EVERNOTE_API_CONSUMER_SECRET;
+var CHINA = false;
+var SANDBOX = false;
 
 
 // home page
@@ -15,8 +18,8 @@ exports.index = function(req, res) {
 
    var client = new Evernote.Client({
       token: token,
-      sandbox: config.SANDBOX,
-      china: config.CHINA
+      sandbox: SANDBOX,
+      china: CHINA
    });
 
    var noteStore = client.getNoteStore();
@@ -76,10 +79,10 @@ exports.index = function(req, res) {
 // OAuth
 exports.oauth = function(req, res) {
    var client = new Evernote.Client({
-      consumerKey: config.API_CONSUMER_KEY,
-      consumerSecret: config.API_CONSUMER_SECRET,
-      sandbox: config.SANDBOX,
-      china: config.CHINA
+      consumerKey: API_CONSUMER_KEY,
+      consumerSecret: API_CONSUMER_SECRET,
+      sandbox: SANDBOX,
+      china: CHINA
    });
 
    client.getRequestToken(callbackUrl, function(error, oauthToken, oauthTokenSecret, results) {
@@ -100,10 +103,10 @@ exports.oauth = function(req, res) {
 // OAuth callback
 exports.oauth_callback = function(req, res) {
    var client = new Evernote.Client({
-      consumerKey: config.API_CONSUMER_KEY,
-      consumerSecret: config.API_CONSUMER_SECRET,
-      sandbox: config.SANDBOX,
-      china: config.CHINA
+      consumerKey: API_CONSUMER_KEY,
+      consumerSecret: API_CONSUMER_SECRET,
+      sandbox: SANDBOX,
+      china: CHINA
    });
 
    client.getAccessToken(
