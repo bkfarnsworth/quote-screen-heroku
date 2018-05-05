@@ -9,7 +9,7 @@ var routes = require('./routes');
 var app = express();
 
 app.set('views', __dirname + '/views');
-app.set('view engine', 'pug');
+app.set('view engine', 'pug');   
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
