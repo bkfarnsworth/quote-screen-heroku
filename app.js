@@ -29,6 +29,3 @@ app.get('/clear', routes.clear);
 app.listen(PORT , function() {
   console.log(`Listening on ${ PORT }`);
 });
-
-
-console.log('process.env.EVERNOTE_API_CONSUMER_SECRET: ', process.env.EVERNOTE_API_CONSUMER_SECRET);
