@@ -1,7 +1,9 @@
 var Evernote = require('evernote');
 var enml = require('enml-js');
 
-var callbackUrl = "http://localhost:5000/oauth_callback";
+var PORT = process.env.PORT || 5000;
+
+var callbackUrl = "http://localhost:" + PORT + "/oauth_callback";
 var token = process.env.EVERNOTE_PROD_TOKEN;
 var API_CONSUMER_KEY = process.env.EVERNOTE_API_CONSUMER_KEY;
 var API_CONSUMER_SECRET = process.env.EVERNOTE_API_CONSUMER_SECRET;
