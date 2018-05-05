@@ -1,4 +1,4 @@
-const PORT = 3000;
+const PORT = 5000;
 
 // Module dependencies
 var bodyParser = require('body-parser');
@@ -20,7 +20,7 @@ app.use(expressSession({
 }));
 
 // Routes
-app.get('/', routes.homePage);
+app.get('/', routes.index);
 app.get('/oauth', routes.oauth);
 app.get('/oauth_callback', routes.oauth_callback);
 app.get('/clear', routes.clear);
