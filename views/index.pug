@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  - if(session.error)
+    h2 Error
+    p
+      = session.error
+  - if(session.quote)
+    p(id='quote') !{session.quote}
+    style.
+        html {
+          font-size: 40px;
+        }
+    script.
+      setTimeout(function(){ window.location.reload() }, 300000);//refresh every 5 minutes
+      //setTimeout(function(){ window.location.reload() }, 5000);
+    
