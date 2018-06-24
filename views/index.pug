@@ -47,6 +47,9 @@ block content
       //allow the elapsed time to be hidden or shown
       var button = document.getElementById('hide-timer');
       var clickHandler = function() {
+
+        alert('worked')
+
         let timeElapsedEl = document.getElementById('time-elapsed');
         if(timeElapsedEl.style.display === 'block') {
           timeElapsedEl.style.display = 'none';
