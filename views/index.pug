@@ -12,6 +12,7 @@ block content
           font-size: 40px;
         }
     script.
-      setTimeout(function(){ window.location.reload() }, 300000);//refresh every 5 minutes
-      //setTimeout(function(){ window.location.reload() }, 5000);
+      //use setInterval - I think sometimes it misses the reload with setTimeout if the window is hidden or something
+      setInterval(function(){ window.location.reload() }, 300000);//refresh every 5 minutes
+      //setInterval(function(){ window.location.reload() }, 5000);
     
