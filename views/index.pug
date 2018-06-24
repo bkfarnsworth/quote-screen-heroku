@@ -45,14 +45,17 @@ block content
       }
 
       //allow the elapsed time to be hidden or shown
-      document.getElementById('hide-timer').addEventListener('click', function() {
-        let button = document.getElementById('time-elapsed');
-        if(button.style.display === 'block') {
-          button.style.display = 'none';
+      var button = document.getElementById('hide-timer');
+      var clickHandler = function() {
+        let timeElapsedEl = document.getElementById('time-elapsed');
+        if(timeElapsedEl.style.display === 'block') {
+          timeElapsedEl.style.display = 'none';
         } else {
-          button.style.display = 'block';
+          timeElapsedEl.style.display = 'block';
         }
-      });
+      }
+      button.addEventListener('click', clickHandler);
+      button.addEventListener('touchend', clickHandler);
 
 
       //refresh every 5 minutes 
