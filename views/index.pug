@@ -8,6 +8,7 @@ block content
   - if(session.quote)
     p(id='quote') !{session.quote}
     p(id='time-elapsed')
+    p(id='client-errors')
     br
     br
     br
@@ -24,57 +25,80 @@ block content
     script.
 
 
-      //copied from stack overflow
-      function fancyTimeFormat(time)
-      {   
-          // Hours, minutes and seconds
-          var hrs = ~~(time / 3600);
-          var mins = ~~((time % 3600) / 60);
-          var secs = time % 60;
-
-          // Output like "1:01" or "4:03:59" or "123:03:59"
-          var ret = "";
-
-          if (hrs > 0) {
-              ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-          }
-
-          ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-          ret += "" + secs;
-          return ret;
-      }
-
-      //allow the elapsed time to be hidden or shown
-      var button = document.getElementById('hide-timer');
-      alert(button.textContent)
-      var clickHandler = function() {
-
-        alert('worked')
-
-        let timeElapsedEl = document.getElementById('time-elapsed');
-        if(timeElapsedEl.style.display === 'block') {
-          timeElapsedEl.style.display = 'none';
-        } else {
-          timeElapsedEl.style.display = 'block';
-        }
-      }
-      button.addEventListener('click', clickHandler);
-      button.addEventListener('touchend', clickHandler);
-
-
       //refresh every 5 minutes 
       //use setInterval in case the window is hidden when timeout expires 
       //(not sure if that will be an issue, but just in case)
       setInterval(function(){ window.location.reload() }, 300000);
 
 
-      //also for debugging, show in the UI how much time has elapsed
-      var startTime = 0;
-      setInterval(function() {
-        startTime++;
-        let timeEl = document.getElementById('time-elapsed')
-        timeEl.textContent = fancyTimeFormat(startTime);
-      }, 1000);
+
+      //VARIOUS HACKS TO GET THE REFRESH TO WORK...????????
+
+      //- var onLoad = function() {
+
+      
+      //- document.getElementById('client-errors').textContent = 'ERROR'
+
+      //- //copied from stack overflow
+      //- function fancyTimeFormat(time)
+      //- {   
+      //-     // Hours, minutes and seconds
+      //-     var hrs = ~~(time / 3600);
+      //-     var mins = ~~((time % 3600) / 60);
+      //-     var secs = time % 60;
+
+      //-     // Output like "1:01" or "4:03:59" or "123:03:59"
+      //-     var ret = "";
+
+      //-     if (hrs > 0) {
+      //-         ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+      //-     }
+
+      //-     ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+      //-     ret += "" + secs;
+      //-     return ret;
+      //- }
+
+      //- //allow the elapsed time to be hidden or shown
+      //- var button = document.getElementById('hide-timer');
+      //- alert(button.textContent)
+      //- var clickHandler = function() {
+
+      //-   alert('worked')
+
+      //-   let timeElapsedEl = document.getElementById('time-elapsed');
+      //-   if(timeElapsedEl.style.display === 'block') {
+      //-     timeElapsedEl.style.display = 'none';
+      //-   } else {
+      //-     timeElapsedEl.style.display = 'block';
+      //-   }
+      //- }
+      //- button.addEventListener('click', clickHandler);
+      //- button.addEventListener('touchend', clickHandler);
+
+
+      //- //refresh every 5 minutes 
+      //- //use setInterval in case the window is hidden when timeout expires 
+      //- //(not sure if that will be an issue, but just in case)
+      //- setInterval(function(){ window.location.reload() }, 300000);
+
+
+      //- //also for debugging, show in the UI how much time has elapsed
+      //- var startTime = 0;
+      //- setInterval(function() {
+      //-   startTime++;
+      //-   let timeEl = document.getElementById('time-elapsed')
+      //-   timeEl.textContent = fancyTimeFormat(startTime);
+      //- }, 1000);
+
+      //- }
+
+      //- var tid = setInterval( function () {
+      //-   if ( document.readyState !== 'complete' ) return;
+      //-     clearInterval( tid );       
+      //-     // do your work
+      //-     onLoad();
+      //- }, 100 );
       
 
 
