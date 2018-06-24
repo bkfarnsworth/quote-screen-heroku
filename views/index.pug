@@ -7,12 +7,68 @@ block content
       = session.error
   - if(session.quote)
     p(id='quote') !{session.quote}
+    p(id='time-elapsed')
+    br
+    br
+    br
+    br
+    button(id='hide-timer') Hide/Show timer
     style.
         html {
           font-size: 40px;
         }
+
+        #time-elapsed {
+          display: none;
+        }
     script.
-      //use setInterval - I think sometimes it misses the reload with setTimeout if the window is hidden or something
-      setInterval(function(){ window.location.reload() }, 300000);//refresh every 5 minutes
-      //setInterval(function(){ window.location.reload() }, 5000);
-    
+
+
+      //copied from stack overflow
+      function fancyTimeFormat(time)
+      {   
+          // Hours, minutes and seconds
+          var hrs = ~~(time / 3600);
+          var mins = ~~((time % 3600) / 60);
+          var secs = time % 60;
+
+          // Output like "1:01" or "4:03:59" or "123:03:59"
+          var ret = "";
+
+          if (hrs > 0) {
+              ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+          }
+
+          ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+          ret += "" + secs;
+          return ret;
+      }
+
+      //allow the elapsed time to be hidden or shown
+      document.getElementById('hide-timer').addEventListener('click', function() {
+        let button = document.getElementById('time-elapsed');
+        if(button.style.display === 'block') {
+          button.style.display = 'none';
+        } else {
+          button.style.display = 'block';
+        }
+      });
+
+
+      //refresh every 5 minutes 
+      //use setInterval in case the window is hidden when timeout expires 
+      //(not sure if that will be an issue, but just in case)
+      setInterval(function(){ window.location.reload() }, 300000);
+
+
+      //also for debugging, show in the UI how much time has elapsed
+      var startTime = 0;
+      setInterval(function() {
+        startTime++;
+        let timeEl = document.getElementById('time-elapsed')
+        timeEl.textContent = fancyTimeFormat(startTime);
+      }, 1000);
+      
+
+
+
